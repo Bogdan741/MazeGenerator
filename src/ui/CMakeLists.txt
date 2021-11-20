@@ -2,6 +2,8 @@ set(UI_FORMS
     dialog.cpp
     mainwindow.cpp
     mainwindow.ui
+    MazeDisplayer.cpp
+    MazeRenderer.cpp
 )
 
 add_library(Ui STATIC
@@ -9,7 +11,7 @@ ${UI_FORMS}
 )
 target_include_directories(Ui PRIVATE src)
 
-find_package(QT NAMES Qt6 Qt5 COMPONENTS Widgets REQUIRED)
+find_package(QT NAMES Qt6 COMPONENTS Widgets REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets REQUIRED)
 
-target_link_libraries(Ui PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+target_link_libraries(Ui PRIVATE Qt${QT_VERSION_MAJOR}::Widgets )

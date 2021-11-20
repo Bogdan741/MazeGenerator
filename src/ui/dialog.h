@@ -7,6 +7,8 @@
 #include <QSpinBox>
 #include <QComboBox>
 #include <types.h>
+#include <array>
+#include <MazeDisplayer.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui
@@ -28,11 +30,15 @@ private:
 
 private slots:
     void apply();
-    bool changeColor(QPushButton * pushB, QColor &tmpColor);
+    bool changeColor(QPushButton *pushB, QColor &tmpColor);
 
 private:
     MMaze::Settings &m_settings;
 
+    QColor m_tmpBackgroundColor;
+    QColor m_tmpMazeWallColor;
+    QColor m_tmpSolvLineColor;
+    
     QLabel *n_mazeColor;
     QLabel *n_solColor;
     QLabel *n_backgoundColor;
@@ -53,9 +59,6 @@ private:
 
     QPushButton *b_apply;
     QPushButton *b_cancel;
-
-    QColor m_tmpBackgroundColor;
-    QColor m_tmpMazeWallColor;
-    QColor m_tmpSolvLineColor;
+    
 };
 #endif // DIALOG_H

@@ -26,7 +26,7 @@ std::vector<std::pair<uint32_t, uint32_t>> BreadthFirstSearch::FindSpanningTree(
             for (const auto &edge : adjacencylist[vertex])
             {
                 uint32_t nextvertex = edge.vertex;
-                if (nextvertex < 0 or visited_a[nextvertex])
+                if (nextvertex == -1 || visited_a[nextvertex])
                     continue;
                 visited_a[nextvertex] = true;
                 m_spanningtree.push_back({vertex, nextvertex});

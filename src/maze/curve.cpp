@@ -14,9 +14,9 @@ Line::Line(double x1_, double y1_, double x2_, double y2_)
 {
 }
 
-Line::Line() : Line(0, 0, 0, 0)
-{
-}
+// Line::Line() : Line(0, 0, 0, 0)
+// {
+// }
 
 Arc::Arc(double cx_, double cy_, double r_, double theta1_, double theta2_)
     : Curve(CurveType::ARC), cx(cx_), cy(cy_), r(r_), theta1(theta1_), theta2(theta2_)

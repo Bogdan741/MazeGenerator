@@ -58,15 +58,21 @@ uint32_t Maze::GetEnd() const
     return mazeEnd;
 }
 
-std::vector<std::shared_ptr<Curve>> Maze::GetCurvesCoordinates() const
+// std::vector<std::shared_ptr<Curve>> Maze::GetCurvesCoordinates() const
+// {
+//     std::vector<std::shared_ptr<Curve>> res;
+//     for (const auto vertexList : adjucenyList)
+//     {
+//         for (const auto connection : vertexList)
+//         {
+//             res.push_back(connection.curve);
+//         }
+//     }
+//     return res;
+// }
+
+void Maze::InitializeMaze()
 {
-    std::vector<std::shared_ptr<Curve>> res;
-    for (const auto vertexList : adjucenyList)
-    {
-        for (const auto connection : vertexList)
-        {
-            res.push_back(connection.curve);
-        }
-    }
-    return res;
+    adjucenyList.clear();
+    adjucenyList.resize(nvertices);
 }

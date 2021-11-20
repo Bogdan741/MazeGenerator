@@ -1,6 +1,6 @@
 #ifndef _MAZE_
 #define _MAZE_
-#include "spanningtreealgo.h"
+#include <spanningtreealgo.h>
 #include <vector>
 namespace MMaze
 {
@@ -22,10 +22,12 @@ namespace MMaze
         uint32_t GetStart() const;
         uint32_t GetEnd() const;
         
-        virtual std::vector<Connection> GetDrawPath(std::vector<std::pair<uint32_t, uint32_t>> & path) = 0;
+        virtual std::tuple<uint32_t, uint32_t, uint32_t, uint32_t> GetMazeCoordinates() const = 0;
+        virtual std::vector<Connection> GetDrawPath(std::vector<std::pair<uint32_t, uint32_t>> & path) const = 0;
 
     protected:
         virtual void InitializeMaze() = 0;
+
         void RemoveWalls();
     protected:
         uint32_t nvertices;

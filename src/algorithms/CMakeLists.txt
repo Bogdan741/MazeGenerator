@@ -1,11 +1,11 @@
 set(ALGORITHMS
-    astar.cpp
-    BFSSolver.cpp
+    # astar.cpp
+    # BFSSolver.cpp
     breadthfirstsearch.cpp
     depthfirstsearch.cpp
-    DFSSolver.cpp
+    # DFSSolver.cpp
     kruscal.cpp
-    mazesolveralgo.cpp
+    # mazesolveralgo.cpp
     prim.cpp
     spanningtreealgo.cpp
 )

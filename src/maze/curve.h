@@ -21,7 +21,7 @@ namespace MMaze
     struct Line : public Curve
     {
         Line(double x1_, double y1_, double x2_, double y2_);
-        Line();
+        // Line();
         double x1;
         double x2;
         double y1;

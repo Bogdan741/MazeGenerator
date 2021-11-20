@@ -26,6 +26,16 @@ namespace MMaze
         RectangleCombMaze
     };
 
+    enum class DifficultyClass : char
+    {
+        EASY = 0,
+        NORMAL,
+        HARD,
+        EXTREAM,
+        INSANE,
+    };
+
+    //POD-like structure
     struct Settings
     {
         QColor backgroundColor;

@@ -36,8 +36,8 @@ std::vector<std::pair<uint32_t, uint32_t>> Kruscal::FindSpanningTree(uint32_t nv
             m_setNumbers[a] = b;
             m_spanningtree.push_back(edge);
         }
-        return m_spanningtree;
     }
+        return m_spanningtree;
 }
 
 uint32_t Kruscal::GetSetNumber(uint32_t vertex)

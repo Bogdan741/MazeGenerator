@@ -1,5 +1,5 @@
-#ifndef _DEEP_FIRST_SEARCH_
-#define _DEEP_FIRST_SEARCH_
+#ifndef _DEPTH_FIRST_SEARCH_
+#define _DEPTH_FIRST_SEARCH_
 
 #include "spanningtreealgo.h"
 

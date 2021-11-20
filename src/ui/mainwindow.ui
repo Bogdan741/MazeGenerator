@@ -14,9 +14,15 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(141, 157, 168);</string>
+   </property>
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
      <widget class="QStackedWidget" name="stackedWidget">
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
       <property name="currentIndex">
        <number>0</number>
       </property>
@@ -27,10 +33,13 @@
           <property name="orientation">
            <enum>Qt::Vertical</enum>
           </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Fixed</enum>
+          </property>
           <property name="sizeHint" stdset="0">
            <size>
             <width>20</width>
-            <height>40</height>
+            <height>120</height>
            </size>
           </property>
          </spacer>
@@ -47,7 +56,7 @@
             </property>
             <property name="sizeHint" stdset="0">
              <size>
-              <width>40</width>
+              <width>60</width>
               <height>20</height>
              </size>
             </property>
@@ -56,10 +65,21 @@
           <item>
            <widget class="QPushButton" name="start_b">
             <property name="sizePolicy">
-             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+             <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton{
+	background-color: rgb(114, 159, 207);
+	border-radius: 10px;
+	font: 30pt &quot;Ubuntu&quot;;
+}
+:hover
+{
+	background-color: rgb(52, 101, 164);
+}</string>
             </property>
             <property name="text">
              <string>Start</string>
@@ -76,7 +96,7 @@
             </property>
             <property name="sizeHint" stdset="0">
              <size>
-              <width>40</width>
+              <width>60</width>
               <height>20</height>
              </size>
             </property>
@@ -96,7 +116,7 @@
             </property>
             <property name="sizeHint" stdset="0">
              <size>
-              <width>40</width>
+              <width>60</width>
               <height>20</height>
              </size>
             </property>
@@ -104,6 +124,23 @@
           </item>
           <item>
            <widget class="QPushButton" name="settings_b">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton{
+	background-color: rgb(114, 159, 207);
+	border-radius: 10px;
+	font: 30pt &quot;Ubuntu&quot;;
+}
+:hover
+{
+	background-color: rgb(52, 101, 164);
+}</string>
+            </property>
             <property name="text">
              <string>Settings</string>
             </property>
@@ -119,13 +156,29 @@
             </property>
             <property name="sizeHint" stdset="0">
              <size>
-              <width>40</width>
+              <width>60</width>
               <height>20</height>
              </size>
             </property>
            </spacer>
           </item>
          </layout>
+        </item>
+        <item>
+         <spacer name="verticalSpacer_5">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Fixed</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>60</height>
+           </size>
+          </property>
+         </spacer>
         </item>
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -139,7 +192,7 @@
             </property>
             <property name="sizeHint" stdset="0">
              <size>
-              <width>40</width>
+              <width>60</width>
               <height>20</height>
              </size>
             </property>
@@ -147,6 +200,23 @@
           </item>
           <item>
            <widget class="QPushButton" name="exit_b">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton{
+	background-color: rgb(114, 159, 207);
+	border-radius: 10px;
+	font: 30pt &quot;Ubuntu&quot;;
+}
+:hover
+{
+	background-color: rgb(52, 101, 164);
+}</string>
+            </property>
             <property name="text">
              <string>Exit</string>
             </property>
@@ -162,7 +232,7 @@
             </property>
             <property name="sizeHint" stdset="0">
              <size>
-              <width>40</width>
+              <width>60</width>
               <height>20</height>
              </size>
             </property>
@@ -175,10 +245,13 @@
           <property name="orientation">
            <enum>Qt::Vertical</enum>
           </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Fixed</enum>
+          </property>
           <property name="sizeHint" stdset="0">
            <size>
             <width>20</width>
-            <height>40</height>
+            <height>70</height>
            </size>
           </property>
          </spacer>
@@ -186,7 +259,7 @@
        </layout>
       </widget>
       <widget class="QWidget" name="page_2">
-       <layout class="QVBoxLayout" name="verticalLayout_3">
+       <layout class="QVBoxLayout" name="verticalLayout_3" stretch="1,0,0,0,0,1,0,0">
         <item>
          <spacer name="verticalSpacer_3">
           <property name="orientation">
@@ -212,7 +285,7 @@
             </property>
             <property name="sizeHint" stdset="0">
              <size>
-              <width>40</width>
+              <width>60</width>
               <height>20</height>
              </size>
             </property>
@@ -220,6 +293,14 @@
           </item>
           <item>
            <widget class="QPushButton" name="easy_b">
+            <property name="styleSheet">
+             <string notr="true">QPushButton{
+	background-color: qlineargradient(spread:reflect, x1:0.477, y1:0, x2:0.485981, y2:0.5, stop:0 rgba(114, 159, 207, 255), stop:1 rgba(255, 255, 255, 255));
+	border-radius: 10px;
+	font: 30pt &quot;Ubuntu&quot;;
+}
+</string>
+            </property>
             <property name="text">
              <string>Easy</string>
             </property>
@@ -235,7 +316,7 @@
             </property>
             <property name="sizeHint" stdset="0">
              <size>
-              <width>40</width>
+              <width>60</width>
               <height>20</height>
              </size>
             </property>
@@ -255,7 +336,7 @@
             </property>
             <property name="sizeHint" stdset="0">
              <size>
-              <width>40</width>
+              <width>60</width>
               <height>20</height>
              </size>
             </property>
@@ -263,6 +344,14 @@
           </item>
           <item>
            <widget class="QPushButton" name="normal_b">
+            <property name="styleSheet">
+             <string notr="true">QPushButton{
+	background-color: qlineargradient(spread:reflect, x1:0.477, y1:0, x2:0.485981, y2:0.5, stop:0 rgba(114, 159, 207, 255), stop:1 rgba(255, 255, 255, 255));
+	border-radius: 10px;
+	font: 30pt &quot;Ubuntu&quot;;
+}
+</string>
+            </property>
             <property name="text">
              <string>Normal</string>
             </property>
@@ -278,7 +367,7 @@
             </property>
             <property name="sizeHint" stdset="0">
              <size>
-              <width>40</width>
+              <width>60</width>
               <height>20</height>
              </size>
             </property>
@@ -298,7 +387,7 @@
             </property>
             <property name="sizeHint" stdset="0">
              <size>
-              <width>40</width>
+              <width>60</width>
               <height>20</height>
              </size>
             </property>
@@ -306,6 +395,14 @@
           </item>
           <item>
            <widget class="QPushButton" name="hard_b">
+            <property name="styleSheet">
+             <string notr="true">QPushButton{
+	background-color: qlineargradient(spread:reflect, x1:0.477, y1:0, x2:0.485981, y2:0.5, stop:0 rgba(114, 159, 207, 255), stop:1 rgba(255, 255, 255, 255));
+	border-radius: 10px;
+	font: 30pt &quot;Ubuntu&quot;;
+}
+</string>
+            </property>
             <property name="text">
              <string>Hard</string>
             </property>
@@ -321,7 +418,7 @@
             </property>
             <property name="sizeHint" stdset="0">
              <size>
-              <width>40</width>
+              <width>60</width>
               <height>20</height>
              </size>
             </property>
@@ -341,7 +438,7 @@
             </property>
             <property name="sizeHint" stdset="0">
              <size>
-              <width>40</width>
+              <width>60</width>
               <height>20</height>
              </size>
             </property>
@@ -349,6 +446,14 @@
           </item>
           <item>
            <widget class="QPushButton" name="extream_b">
+            <property name="styleSheet">
+             <string notr="true">QPushButton{
+	background-color: qlineargradient(spread:reflect, x1:0.477, y1:0, x2:0.485981, y2:0.5, stop:0 rgba(114, 159, 207, 255), stop:1 rgba(255, 255, 255, 255));
+	border-radius: 10px;
+	font: 30pt &quot;Ubuntu&quot;;
+}
+</string>
+            </property>
             <property name="text">
              <string>Extream</string>
             </property>
@@ -364,13 +469,26 @@
             </property>
             <property name="sizeHint" stdset="0">
              <size>
-              <width>40</width>
+              <width>60</width>
               <height>20</height>
              </size>
             </property>
            </spacer>
           </item>
          </layout>
+        </item>
+        <item>
+         <spacer name="verticalSpacer_6">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
         </item>
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_8">
@@ -384,7 +502,7 @@
             </property>
             <property name="sizeHint" stdset="0">
              <size>
-              <width>40</width>
+              <width>60</width>
               <height>20</height>
              </size>
             </property>
@@ -392,6 +510,14 @@
           </item>
           <item>
            <widget class="QPushButton" name="back_b">
+            <property name="styleSheet">
+             <string notr="true">QPushButton{
+	background-color: qlineargradient(spread:reflect, x1:0.477, y1:0, x2:0.485981, y2:0.5, stop:0 rgba(114, 159, 207, 255), stop:1 rgba(255, 255, 255, 255));
+	border-radius: 10px;
+	font: 30pt &quot;Ubuntu&quot;;
+}
+</string>
+            </property>
             <property name="text">
              <string>Back</string>
             </property>
@@ -407,7 +533,7 @@
             </property>
             <property name="sizeHint" stdset="0">
              <size>
-              <width>40</width>
+              <width>60</width>
               <height>20</height>
              </size>
             </property>
@@ -423,7 +549,7 @@
           <property name="sizeHint" stdset="0">
            <size>
             <width>20</width>
-            <height>40</height>
+            <height>30</height>
            </size>
           </property>
          </spacer>
@@ -434,7 +560,6 @@
     </item>
    </layout>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources/>
  <connections/>
