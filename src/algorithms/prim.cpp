@@ -14,9 +14,9 @@ std::vector<std::pair<uint32_t, uint32_t>> Prim::FindSpanningTree(uint32_t nvert
     std::vector<std::pair<uint32_t, uint32_t>> boundary;
 
     // Chooses random vertex to start
-    uint32_t vertex = std::uniform_int_distribution<uint32_t>(0, vertex - 1)(m_generator);
+    uint32_t vertex = std::uniform_int_distribution<uint32_t>(0, nvertices - 1)(m_generator);
 
-    for (uint32_t i{0}; i < nvertices; ++i)
+    for (uint32_t i{0}; i < nvertices-1; ++i)
     {
         // Since all distances from edge to edge are equal
         // we add adjucent vertexes to the visited list if they are not visited yet

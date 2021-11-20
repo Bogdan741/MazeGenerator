@@ -31,6 +31,7 @@ private:
 private slots:
     void apply();
     bool changeColor(QPushButton *pushB, QColor &tmpColor);
+    void setCurrentState();
 
 private:
     MMaze::Settings &m_settings;

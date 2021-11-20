@@ -19,9 +19,14 @@ void MazeDisplayer::setUpWidget()
     b_hideSolution = new QPushButton{tr("Hide solution")};
     b_showSolution = new QPushButton{tr("Show solution")};
     b_save = new QPushButton{tr("Save image:")};
+    
+    b_close->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Fixed);
+    b_hideSolution->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Fixed);
+    b_showSolution->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Fixed);
+    b_save->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Fixed);
 
     
-    QSpacerItem * widthRegulator = new QSpacerItem(80,0,QSizePolicy::Fixed, QSizePolicy::Fixed);
+    QSpacerItem * widthRegulator = new QSpacerItem(150,0,QSizePolicy::Fixed, QSizePolicy::Fixed);
     QSpacerItem * heightRegulator = new QSpacerItem(0,200, QSizePolicy::Fixed, QSizePolicy::Expanding);
 
     QVBoxLayout *leftLayout = new QVBoxLayout{};
@@ -37,6 +42,7 @@ void MazeDisplayer::setUpWidget()
     mainLayout->addLayout(leftLayout);
 
     m_mazeRanderer = new MMaze::MazeRenderer(m_settings, m_difficulty);
+    m_mazeRanderer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     mainLayout->addWidget(m_mazeRanderer);
     setLayout(mainLayout);
 

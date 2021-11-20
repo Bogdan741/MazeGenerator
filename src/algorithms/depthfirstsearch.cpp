@@ -28,7 +28,7 @@ void DepthFirstSearch::DFS(uint32_t vertex, const Graph &adjacencylist)
     for (auto index : nodeorder)
     {
         uint32_t nextvertex = adjacencylist[vertex][index].vertex;
-        if (nextvertex < 0 || m_visited[nextvertex])
+        if (nextvertex == -1 || m_visited[nextvertex])
             continue;
         m_spanningtree.push_back({vertex, nextvertex});
         DFS(nextvertex, adjacencylist);

@@ -158,3 +158,9 @@ bool SettingsDialog::changeColor(QPushButton *pushB, QColor &tmpColor)
     }
     return false;
 }
+
+
+void SettingsDialog::setCurrentState()
+{
+    //TODO: Add implementation
+}

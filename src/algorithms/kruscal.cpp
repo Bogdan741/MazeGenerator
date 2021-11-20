@@ -1,5 +1,5 @@
 #include "kruscal.h"
-
+#include <algorithm>
 using namespace MMaze;
 using namespace MazeGenerators;
 
@@ -16,10 +16,11 @@ std::vector<std::pair<uint32_t, uint32_t>> Kruscal::FindSpanningTree(uint32_t nv
     {
         for (auto const adjacentVertex : adjacencylist[vertex])
         {
-            if (adjacentVertex.vertex > vertex)
+            if (adjacentVertex.vertex != -1 && adjacentVertex.vertex > vertex)
                 edges.push_back({vertex, adjacentVertex.vertex});
         }
     }
+    std::shuffle(edges.begin(), edges.end(), m_generator);
 
     // Provides unique number for each set
     m_setNumbers.resize(nvertices);
@@ -37,7 +38,7 @@ std::vector<std::pair<uint32_t, uint32_t>> Kruscal::FindSpanningTree(uint32_t nv
             m_spanningtree.push_back(edge);
         }
     }
-        return m_spanningtree;
+    return m_spanningtree;
 }
 
 uint32_t Kruscal::GetSetNumber(uint32_t vertex)

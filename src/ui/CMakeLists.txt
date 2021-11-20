@@ -4,6 +4,7 @@ set(UI_FORMS
     mainwindow.ui
     MazeDisplayer.cpp
     MazeRenderer.cpp
+    application.cpp
 )
 
 add_library(Ui STATIC

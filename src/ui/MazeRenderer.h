@@ -5,6 +5,7 @@
 #include <QMainWindow>
 #include <types.h>
 #include <maze.h>
+#include <mazesolveralgo.h>
 
 namespace MMaze
 {
@@ -25,7 +26,8 @@ namespace MMaze
         MMaze::Maze * m_maze;
         MMaze::MazeGenerators::SpanningTreeAlogrithm *m_mazeGenerationAlgorithm;
         //MMaze::Solution * m_solution;
-        //MMaze::MazeSovAlog * m_mazeSolvmentAlogrithm;
+        MMaze::MazeSolvers::MazeSolverAlgorithm * m_mazeSolvmentAlogrithm;
+        bool showSolution{false};
     };
 }
 #endif // MAINWINDOW_H

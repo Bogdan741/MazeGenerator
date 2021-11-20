@@ -12,6 +12,7 @@ namespace MMaze
         class MazeSolverAlgorithm
         {
         public:
+            MazeSolverAlgorithm();
             virtual std::vector<std::pair<uint32_t, uint32_t>> Solve(
                             std::vector<std::vector<uint32_t>> spanningTree, uint32_t start, uint32_t end) = 0;
         protected:

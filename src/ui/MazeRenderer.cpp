@@ -4,8 +4,12 @@
 #include <kruscal.h>
 #include <depthfirstsearch.h>
 #include <prim.h>
+#include <astar.h>
+#include <BFSSolver.h>
+#include <DFSSolver.h>
 #include <QPainter>
-
+#include <QPainterPath>
+#include <application.h>
 using namespace MMaze;
 
 MazeRenderer::MazeRenderer(const MMaze::Settings &settings_, MMaze::DifficultyClass diff_, QWidget *parent)
@@ -16,14 +20,17 @@ MazeRenderer::MazeRenderer(const MMaze::Settings &settings_, MMaze::DifficultyCl
     MMaze::MazeTypes tMazeType = m_settings.mazeType;
     if (tMazeType == MMaze::MazeTypes::RectangularMaze)
     {
-        m_maze = new MMaze::RectangleMaze(40, 20);
+        std::pair<uint32_t, uint32_t> diffSize = Application::GetRectangleMazeSizeDifficulty(diff_);
+        m_maze = new MMaze::RectangleMaze(diffSize.first, diffSize.second);
     }
     else if (tMazeType == MMaze::MazeTypes::RectangleCombMaze)
     {
-        // m_maze = new MMaze::RectangleMaze(40,20);
+        std::pair<uint32_t, uint32_t> diffSize = Application::GetRectangleMazeSizeDifficulty(diff_);
+        // m_maze = new MMaze::RectangleCombMaze(diffSize.first, diffSize.second);
     }
     else if (tMazeType == MMaze::MazeTypes::HoneyCombMaze)
     {
+        uint32_t diffSize = Application::GetHoneyCombMazeSizeDifficulty(diff_);
         // m_maze = new MMaze::RectangleMaze(40,20);
     }
 
@@ -42,18 +49,21 @@ MazeRenderer::MazeRenderer(const MMaze::Settings &settings_, MMaze::DifficultyCl
     }
     else if (tMazeGenerationAlgorithm == MMaze::MazeGenAlgo::Prim)
     {
-        m_mazeGenerationAlgorithm = new MMaze::MazeGenerators::Kruscal();
+        m_mazeGenerationAlgorithm = new MMaze::MazeGenerators::Prim();
     }
 
     MMaze::MazeSolvAlgo tMazeSolvmentAlgorithm = m_settings.mazeSolveAlgo;
     if (tMazeSolvmentAlgorithm == MMaze::MazeSolvAlgo::BFS)
     {
+        m_mazeSolvmentAlogrithm = new MMaze::MazeSolvers::BFSSolver;
     }
     else if (tMazeSolvmentAlgorithm == MMaze::MazeSolvAlgo::DFS)
     {
+        m_mazeSolvmentAlogrithm = new MMaze::MazeSolvers::DFSSolver;
     }
     else if (tMazeSolvmentAlgorithm == MMaze::MazeSolvAlgo::AStar)
     {
+        m_mazeSolvmentAlogrithm = new MMaze::MazeSolvers::AStar;
     }
 
     m_maze->GenerateMaze(m_mazeGenerationAlgorithm);
@@ -64,12 +74,21 @@ void MazeRenderer::paintEvent(QPaintEvent *event)
     double h = 20;
 
     QPainter paint(this);
+    QPainterPath path;
+    path.addRect(0,0,width(),height());
+    paint.setBrush(m_settings.backgroundColor);
+    paint.drawPath(path);
+    // paint.setBackground(QBrush{Qt::red});
+
     QPen wallPen;
+    QPen solutionPen;
+
     wallPen.setColor(m_settings.mazeWallColor);
     wallPen.setWidth(m_settings.lineWidthMazeWall);
 
     paint.setRenderHint(QPainter::Antialiasing);
-    // paint.drawLine(0,0,50,50);
+    paint.setPen(wallPen);
+    
     double widgetWidth = static_cast<double>(this->size().width()) - 2 * h;
     double widgetHeight = static_cast<double>(this->size().height() - 2 * h);
 
@@ -106,6 +125,12 @@ void MazeRenderer::paintEvent(QPaintEvent *event)
             paint.drawLine(line->x1 * K, (mazeHeight - line->y1) * K, line->x2 * K, (mazeHeight - line->y2) * K);
         }
     }
+
+    if(showSolution)
+    {
+        //TODO: show solution
+    }
+    
 }
 
 QSize MazeRenderer::minimumSizeHint() const
