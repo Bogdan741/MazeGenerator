@@ -12,6 +12,7 @@ SettingsDialog::SettingsDialog(MMaze::Settings &settings_, QWidget *parent)
     : QDialog(parent), m_settings(settings_)
 {
     setUpDialog();
+    setCurrentState();
     connect(b_cancel, &QPushButton::released, this, &QDialog::close);
     connect(b_apply, &QPushButton::released, this, &SettingsDialog::apply);
     connect(b_mazeColor, &QPushButton::released, this, [this]
@@ -20,12 +21,10 @@ SettingsDialog::SettingsDialog(MMaze::Settings &settings_, QWidget *parent)
             { this->changeColor(b_solColor, m_tmpSolvLineColor); });
     connect(b_backgroundColor, &QPushButton::released, this, [this]
             { this->changeColor(b_backgroundColor, m_tmpBackgroundColor); });
-    
 }
 
 SettingsDialog::~SettingsDialog()
 {
-    
 }
 
 void SettingsDialog::setUpDialog()
@@ -123,8 +122,8 @@ void SettingsDialog::setUpDialog()
 void SettingsDialog::apply()
 {
     m_settings.backgroundColor = m_tmpBackgroundColor;
-    m_settings.solutionLineColor = m_tmpMazeWallColor;
-    m_settings.mazeWallColor = m_tmpSolvLineColor;
+    m_settings.solutionLineColor = m_tmpSolvLineColor;
+    m_settings.mazeWallColor = m_tmpMazeWallColor;
 
     m_settings.mazeGenAlgo = static_cast<MMaze::MazeGenAlgo>(cb_mazeGenAlgo->itemData(cb_mazeGenAlgo->currentIndex(), Qt::UserRole).toInt());
 
@@ -159,8 +158,58 @@ bool SettingsDialog::changeColor(QPushButton *pushB, QColor &tmpColor)
     return false;
 }
 
-
 void SettingsDialog::setCurrentState()
 {
-    //TODO: Add implementation
+    // * Setting maze generation algorithm option
+    int iMazeGenAlgo = -1;
+    if (m_settings.mazeGenAlgo == MMaze::MazeGenAlgo::BFS)
+        iMazeGenAlgo = cb_mazeGenAlgo->findData(static_cast<int>(MMaze::MazeGenAlgo::BFS));
+    else if (m_settings.mazeGenAlgo == MMaze::MazeGenAlgo::DFS)
+        iMazeGenAlgo = cb_mazeGenAlgo->findData(static_cast<int>(MMaze::MazeGenAlgo::DFS));
+    else if (m_settings.mazeGenAlgo == MMaze::MazeGenAlgo::Kruscal)
+        iMazeGenAlgo = cb_mazeGenAlgo->findData(static_cast<int>(MMaze::MazeGenAlgo::Kruscal));
+    else if (m_settings.mazeGenAlgo == MMaze::MazeGenAlgo::Prim)
+        iMazeGenAlgo = cb_mazeGenAlgo->findData(static_cast<int>(MMaze::MazeGenAlgo::Prim));
+
+    if(iMazeGenAlgo != -1)
+        cb_mazeGenAlgo->setCurrentIndex(iMazeGenAlgo);
+
+    // * Setting maze solving algorithm option
+    int iMazeSolvAlgo = -1;
+    if (m_settings.mazeSolveAlgo == MMaze::MazeSolvAlgo::BFS)
+        iMazeSolvAlgo = cb_solutionAlgo->findData(static_cast<int>(MMaze::MazeSolvAlgo::BFS));
+    else if (m_settings.mazeSolveAlgo == MMaze::MazeSolvAlgo::DFS)
+        iMazeSolvAlgo = cb_solutionAlgo->findData(static_cast<int>(MMaze::MazeSolvAlgo::DFS));
+    else if (m_settings.mazeSolveAlgo == MMaze::MazeSolvAlgo::AStar)
+        iMazeSolvAlgo = cb_solutionAlgo->findData(static_cast<int>(MMaze::MazeSolvAlgo::AStar));
+    
+    if(iMazeSolvAlgo != -1)
+        cb_solutionAlgo->setCurrentIndex(iMazeSolvAlgo);
+    
+    // * Setting maze type option
+    int iMazeType = -1;
+    if(m_settings.mazeType == MMaze::MazeTypes::HoneyCombMaze)
+        iMazeType = cb_mazeType->findData(static_cast<int>(MMaze::MazeTypes::HoneyCombMaze));
+    else if(m_settings.mazeType == MMaze::MazeTypes::RectangularMaze)
+        iMazeType = cb_mazeType->findData(static_cast<int>(MMaze::MazeTypes::RectangularMaze));
+    else if(m_settings.mazeType == MMaze::MazeTypes::RectangleCombMaze)
+        iMazeType = cb_mazeType->findData(static_cast<int>(MMaze::MazeTypes::RectangleCombMaze));
+
+    if(iMazeType != -1)
+        cb_mazeType->setCurrentIndex(iMazeType);
+
+    
+    // * Settings the colors options
+    b_mazeColor->setStyleSheet(QString("background-color: %1;").arg(m_settings.mazeWallColor.name()));
+    m_tmpMazeWallColor = m_settings.mazeWallColor;
+
+    b_backgroundColor->setStyleSheet(QString("background-color: %1;").arg(m_settings.backgroundColor.name()));
+    m_tmpBackgroundColor = m_settings.backgroundColor;
+
+    b_solColor->setStyleSheet(QString("background-color: %1;").arg(m_settings.solutionLineColor.name()));
+    m_tmpSolvLineColor = m_settings.solutionLineColor;
+
+    // * Settings the line width color
+    sb_lineWidthMaze->setValue(m_settings.lineWidthMazeWall);
+    sb_lineWidthSol->setValue(m_settings.lineWidhtSolution);
 }

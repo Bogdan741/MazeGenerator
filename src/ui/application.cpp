@@ -17,13 +17,13 @@ std::pair<uint32_t, uint32_t> Application::GetRectangleMazeSizeDifficulty(MMaze:
     {
         res = std::make_pair(40, 20);
     }
-    else if (diff_ == MMaze::DifficultyClass::EXTREAM)
-    {
-        res = std::make_pair(60, 30);
-    }
     else if (diff_ == MMaze::DifficultyClass::INSANE)
     {
-        res = std::make_pair(100, 60);
+        res = std::make_pair(70, 30);
+    }
+    else if (diff_ == MMaze::DifficultyClass::EXTREAM)
+    {
+        res = std::make_pair(110, 40);
     }
     return res;
 }
@@ -43,14 +43,15 @@ std::pair<uint32_t, uint32_t> Application::GetRectangleCombMazeSizeDifficulty(MM
     {
         res = std::make_pair(40, 20);
     }
-    else if (diff_ == MMaze::DifficultyClass::EXTREAM)
-    {
-        res = std::make_pair(60, 30);
-    }
     else if (diff_ == MMaze::DifficultyClass::INSANE)
+    {
+        res = std::make_pair(70, 30);
+    }
+    else if (diff_ == MMaze::DifficultyClass::EXTREAM)
     {
         res = std::make_pair(100, 60);
     }
+
     return res;
 }
 

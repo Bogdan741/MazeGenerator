@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.5)
 project(Maze VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
-
+set(CMAKE_PREFIX_PATH "/home/avenortoz/Qt/6.1.2/gcc_64/lib/cmake")
 
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)

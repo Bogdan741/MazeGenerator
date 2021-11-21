@@ -9,6 +9,7 @@ namespace MMaze
     public:
         Solution(Maze *maze_);
         void FindSolution(MazeSolvers::MazeSolverAlgorithm *mzsa);
+        std::vector<std::shared_ptr<Curve>> GetPath() const;
 
     private:
         Maze *m_maze;

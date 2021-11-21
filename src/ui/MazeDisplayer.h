@@ -12,7 +12,8 @@ namespace MMaze
         Q_OBJECT
         public:
         MazeDisplayer(const MMaze::Settings & settings_, MMaze::DifficultyClass diff_ , QWidget * parent = nullptr);
-
+        public slots:
+        void saveMaze();
         private:
         void setUpWidget();
 

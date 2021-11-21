@@ -23,6 +23,8 @@ MainWindow::MainWindow(MMaze::Settings &settings_, QWidget *parent)
             { createMazeView(MMaze::DifficultyClass::NORMAL); });
     connect(ui->hard_b, &QPushButton::released, this, [this]
             { createMazeView(MMaze::DifficultyClass::HARD); });
+    connect(ui->insane_b, &QPushButton::released, this, [this]
+            { createMazeView(MMaze::DifficultyClass::INSANE); });
     connect(ui->extream_b, &QPushButton::released, this, [this]
             { createMazeView(MMaze::DifficultyClass::EXTREAM); });
 }
@@ -44,7 +46,7 @@ void MainWindow::createMazeView(MMaze::DifficultyClass diff_)
 {
     if (m_mazes_dispal_a.size() >= maxMazeDisplay)
         return;
-    MMaze::MazeDisplayer *mazeView = new MMaze::MazeDisplayer(m_settings, diff_,this);
+    MMaze::MazeDisplayer *mazeView = new MMaze::MazeDisplayer(m_settings, diff_, this);
     m_mazes_dispal_a.push_back(mazeView);
     mazeView->show();
 }

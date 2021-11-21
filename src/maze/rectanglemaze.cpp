@@ -58,7 +58,11 @@ std::vector<Connection> RectangleMaze::GetDrawPath(std::vector<std::pair<uint32_
         uint32_t x1, y1, x2, y2;
         auto coord1 = GetPosition(edge.first);
         auto coord2 = GetPosition(edge.second);
-        res_path.push_back({edge.second, std::make_shared<Line>(x1 + 0.5, y1 + 0.5, x2 + 0.5, +y2 + 0.5)});
+        x1 = coord1.second;
+        y1 = coord1.first;
+        x2 = coord2.second;
+        y2 = coord2.first;
+        res_path.push_back({edge.second, std::make_shared<Line>(x1 + 0.5, y1 + 0.5, x2 + 0.5, y2 + 0.5)});
     }
     return res_path;
 }

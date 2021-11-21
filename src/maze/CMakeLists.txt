@@ -2,7 +2,7 @@ set(SOURCES
     # combmaze.cpp
     # rectanglecombmaze.cpp
     rectanglemaze.cpp
-    # solution.cpp
+    solution.cpp
     maze.cpp
     curve.cpp
 )

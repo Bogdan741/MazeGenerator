@@ -11,11 +11,13 @@ int main(int argc, char *argv[])
     set.backgroundColor = QColor{255, 255, 255};
     set.mazeWallColor = QColor(0, 0, 0);
     set.solutionLineColor = QColor(255, 122, 51);
-    set.mazeGenAlgo = MMaze::MazeGenAlgo::BFS;
+    set.mazeGenAlgo = MMaze::MazeGenAlgo::DFS;
     set.mazeType = MMaze::MazeTypes::RectangularMaze;
+    set.mazeSolveAlgo = MMaze::MazeSolvAlgo::DFS;
     set.backgroundColor = Qt::blue;
     set.mazeWallColor = Qt::black;
     set.lineWidthMazeWall = 2;
+    set.lineWidhtSolution = 2;
     
     MainWindow w(set);
     w.show();

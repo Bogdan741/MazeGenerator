@@ -15,7 +15,7 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <property name="styleSheet">
-    <string notr="true">background-color: rgb(141, 157, 168);</string>
+    <string notr="true">background-color: rgb(238, 238, 236)</string>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
@@ -65,7 +65,7 @@
           <item>
            <widget class="QPushButton" name="start_b">
             <property name="sizePolicy">
-             <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
@@ -125,7 +125,7 @@
           <item>
            <widget class="QPushButton" name="settings_b">
             <property name="sizePolicy">
-             <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
@@ -170,7 +170,7 @@
            <enum>Qt::Vertical</enum>
           </property>
           <property name="sizeType">
-           <enum>QSizePolicy::Fixed</enum>
+           <enum>QSizePolicy::Expanding</enum>
           </property>
           <property name="sizeHint" stdset="0">
            <size>
@@ -201,7 +201,7 @@
           <item>
            <widget class="QPushButton" name="exit_b">
             <property name="sizePolicy">
-             <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
@@ -259,7 +259,7 @@
        </layout>
       </widget>
       <widget class="QWidget" name="page_2">
-       <layout class="QVBoxLayout" name="verticalLayout_3" stretch="1,0,0,0,0,1,0,0">
+       <layout class="QVBoxLayout" name="verticalLayout_3">
         <item>
          <spacer name="verticalSpacer_3">
           <property name="orientation">
@@ -295,11 +295,15 @@
            <widget class="QPushButton" name="easy_b">
             <property name="styleSheet">
              <string notr="true">QPushButton{
-	background-color: qlineargradient(spread:reflect, x1:0.477, y1:0, x2:0.485981, y2:0.5, stop:0 rgba(114, 159, 207, 255), stop:1 rgba(255, 255, 255, 255));
+	background-color: rgb(114, 159, 207);
 	border-radius: 10px;
 	font: 30pt &quot;Ubuntu&quot;;
 }
-</string>
+
+:hover
+{
+	background-color: rgb(52, 101, 164);
+}</string>
             </property>
             <property name="text">
              <string>Easy</string>
@@ -346,11 +350,15 @@
            <widget class="QPushButton" name="normal_b">
             <property name="styleSheet">
              <string notr="true">QPushButton{
-	background-color: qlineargradient(spread:reflect, x1:0.477, y1:0, x2:0.485981, y2:0.5, stop:0 rgba(114, 159, 207, 255), stop:1 rgba(255, 255, 255, 255));
+	background-color: rgb(114, 159, 207);
 	border-radius: 10px;
 	font: 30pt &quot;Ubuntu&quot;;
 }
-</string>
+
+:hover
+{
+	background-color: rgb(52, 101, 164);
+}</string>
             </property>
             <property name="text">
              <string>Normal</string>
@@ -397,11 +405,15 @@
            <widget class="QPushButton" name="hard_b">
             <property name="styleSheet">
              <string notr="true">QPushButton{
-	background-color: qlineargradient(spread:reflect, x1:0.477, y1:0, x2:0.485981, y2:0.5, stop:0 rgba(114, 159, 207, 255), stop:1 rgba(255, 255, 255, 255));
+	background-color: rgb(114, 159, 207);
 	border-radius: 10px;
 	font: 30pt &quot;Ubuntu&quot;;
 }
-</string>
+
+:hover
+{
+	background-color: rgb(52, 101, 164);
+}</string>
             </property>
             <property name="text">
              <string>Hard</string>
@@ -410,6 +422,61 @@
           </item>
           <item>
            <spacer name="horizontalSpacer_12">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Fixed</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>60</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_9">
+          <item>
+           <spacer name="horizontalSpacer_17">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Fixed</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>60</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="insane_b">
+            <property name="styleSheet">
+             <string notr="true">QPushButton{
+	background-color: rgb(114, 159, 207);
+	border-radius: 10px;
+	font: 30pt &quot;Ubuntu&quot;;
+}
+
+:hover
+{
+	background-color: rgb(52, 101, 164);
+}</string>
+            </property>
+            <property name="text">
+             <string>Insane</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_18">
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
             </property>
@@ -448,11 +515,15 @@
            <widget class="QPushButton" name="extream_b">
             <property name="styleSheet">
              <string notr="true">QPushButton{
-	background-color: qlineargradient(spread:reflect, x1:0.477, y1:0, x2:0.485981, y2:0.5, stop:0 rgba(114, 159, 207, 255), stop:1 rgba(255, 255, 255, 255));
+	background-color: rgb(114, 159, 207);
 	border-radius: 10px;
 	font: 30pt &quot;Ubuntu&quot;;
 }
-</string>
+
+:hover
+{
+	background-color: rgb(52, 101, 164);
+}</string>
             </property>
             <property name="text">
              <string>Extream</string>
@@ -512,11 +583,15 @@
            <widget class="QPushButton" name="back_b">
             <property name="styleSheet">
              <string notr="true">QPushButton{
-	background-color: qlineargradient(spread:reflect, x1:0.477, y1:0, x2:0.485981, y2:0.5, stop:0 rgba(114, 159, 207, 255), stop:1 rgba(255, 255, 255, 255));
+	background-color: rgb(114, 159, 207);
 	border-radius: 10px;
 	font: 30pt &quot;Ubuntu&quot;;
 }
-</string>
+
+:hover
+{
+	background-color: rgb(52, 101, 164);
+}</string>
             </property>
             <property name="text">
              <string>Back</string>

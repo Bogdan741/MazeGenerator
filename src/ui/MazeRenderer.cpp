@@ -10,6 +10,8 @@
 #include <QPainter>
 #include <QPainterPath>
 #include <application.h>
+#include <QtSvg/QSvgGenerator>
+
 using namespace MMaze;
 
 MazeRenderer::MazeRenderer(const MMaze::Settings &settings_, MMaze::DifficultyClass diff_, QWidget *parent)
@@ -67,18 +69,34 @@ MazeRenderer::MazeRenderer(const MMaze::Settings &settings_, MMaze::DifficultyCl
     }
 
     m_maze->GenerateMaze(m_mazeGenerationAlgorithm);
+    m_solution = new MMaze::Solution(m_maze);
+    m_solution->FindSolution(m_mazeSolvmentAlogrithm);
 }
 
 void MazeRenderer::paintEvent(QPaintEvent *event)
 {
-    double h = 20;
 
     QPainter paint(this);
+    paintMaze(paint);
+}
+
+QSize MazeRenderer::minimumSizeHint() const
+{
+    return QSize{500, 200};
+}
+
+QSize MazeRenderer::sizeHint() const
+{
+    return QSize{1000, 400};
+}
+
+void MazeRenderer::paintMaze(QPainter &paint) const
+{
+    double h = 20.0;
     QPainterPath path;
-    path.addRect(0,0,width(),height());
+    path.addRect(0, 0, width(), height());
     paint.setBrush(m_settings.backgroundColor);
     paint.drawPath(path);
-    // paint.setBackground(QBrush{Qt::red});
 
     QPen wallPen;
     QPen solutionPen;
@@ -86,9 +104,12 @@ void MazeRenderer::paintEvent(QPaintEvent *event)
     wallPen.setColor(m_settings.mazeWallColor);
     wallPen.setWidth(m_settings.lineWidthMazeWall);
 
+    solutionPen.setWidth(m_settings.lineWidhtSolution);
+    solutionPen.setColor(m_settings.solutionLineColor);
+
     paint.setRenderHint(QPainter::Antialiasing);
     paint.setPen(wallPen);
-    
+
     double widgetWidth = static_cast<double>(this->size().width()) - 2 * h;
     double widgetHeight = static_cast<double>(this->size().height() - 2 * h);
 
@@ -106,14 +127,14 @@ void MazeRenderer::paintEvent(QPaintEvent *event)
     if (kw > km)
     {
         K = widgetHeight / mazeHeight;
-        y_offset = h;
-        x_offset = (widgetWidth - K * mazeWidth)/2;
+        y_offset = (widgetHeight - K * mazeHeight) / 2 + h;
+        x_offset = (widgetWidth - K * mazeWidth) / 2 + h;
     }
     else
     {
         K = widgetWidth / mazeWidth;
-        x_offset = h;
-        y_offset = (widgetHeight - K * mazeHeight)/2;
+        x_offset = (widgetWidth - K * mazeWidth) / 2 + h;
+        y_offset = (widgetHeight - K * mazeHeight) / 2 + h;
     }
     paint.translate(x_offset, y_offset);
     auto lines_a = m_maze->GetCurvesCoordinates();
@@ -126,19 +147,39 @@ void MazeRenderer::paintEvent(QPaintEvent *event)
         }
     }
 
-    if(showSolution)
+    paint.setPen(solutionPen);
+
+    if (showSolution)
     {
-        //TODO: show solution
+        auto pathLines = m_solution->GetPath();
+        for (auto const edge : pathLines)
+        {
+            if (edge->GetType() == CurveType::LINE)
+            {
+                MMaze::Line *line = static_cast<Line *>(edge.get());
+                paint.drawLine(line->x1 * K, (mazeHeight - line->y1) * K, line->x2 * K, (mazeHeight - line->y2) * K);
+            }
+        }
     }
-    
 }
 
-QSize MazeRenderer::minimumSizeHint() const
+void MazeRenderer::getImage(QString fileName) const
 {
-    return QSize{500, 200};
+    // TODO:
+    QSvgGenerator generator;
+    generator.setFileName(fileName);
+    generator.setSize(size());
+    generator.setViewBox(QRect(0, 0, size().width(), size().height()));
+    generator.setTitle(tr("Maze"));
+    generator.setDescription(tr("Instance of the maze"));
+    QPainter painter;
+    painter.begin(&generator);
+    paintMaze(painter);
+    painter.end();
 }
 
-QSize MazeRenderer::sizeHint() const
+void MazeRenderer::setSolutionMode(bool mode)
 {
-    return QSize{1000, 400};
+    showSolution = mode;
+    update();
 }
