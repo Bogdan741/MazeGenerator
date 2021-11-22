@@ -3,7 +3,7 @@
 #include <QHBoxLayout>
 #include <QSpacerItem>
 #include <QFileDialog>
-
+#include <QDir>
 using namespace MMaze;
 
 MazeDisplayer::MazeDisplayer(const MMaze::Settings & settings_, MMaze::DifficultyClass diff_, QWidget * parent)
@@ -22,7 +22,7 @@ MazeDisplayer::MazeDisplayer(const MMaze::Settings & settings_, MMaze::Difficult
         b_hideSolution->setEnabled(true);
         m_mazeRanderer->setSolutionMode(true);
     });
-    //TODO: Implement slots
+    m_pathToSaveImage = QDir::homePath();
 }
 
 void MazeDisplayer::setUpWidget()
@@ -65,10 +65,11 @@ void MazeDisplayer::setUpWidget()
 
 void MazeDisplayer::saveMaze() 
 {
-    QString fileName = QFileDialog::getSaveFileName(this);
+    QString fileName = QFileDialog::getSaveFileName(this,tr("Save image"),m_pathToSaveImage,tr("Images (*.svg)"));
 
     if(fileName.isNull())
         return;
     
-    m_mazeRanderer->getImage(fileName);
+    m_pathToSaveImage = QFileInfo(fileName).path();
+    m_mazeRanderer->getImage(fileName+".svg");
 }

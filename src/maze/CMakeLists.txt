@@ -1,6 +1,6 @@
 set(SOURCES
-    # combmaze.cpp
-    # rectanglecombmaze.cpp
+    combmaze.cpp
+    rectanglecombmaze.cpp
     rectanglemaze.cpp
     solution.cpp
     maze.cpp

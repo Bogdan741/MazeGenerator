@@ -22,7 +22,7 @@ namespace MMaze
         uint32_t GetStart() const;
         uint32_t GetEnd() const;
         
-        virtual std::tuple<uint32_t, uint32_t, uint32_t, uint32_t> GetMazeCoordinates() const = 0;
+        virtual std::tuple<int, int, int, int> GetMazeCoordinates() const = 0;
         virtual std::vector<Connection> GetDrawPath(std::vector<std::pair<uint32_t, uint32_t>> & path) const = 0;
 
     protected:
@@ -34,7 +34,7 @@ namespace MMaze
         Graph adjucenyList;
         uint32_t mazeStart;
         uint32_t mazeEnd;
-        std::vector<std::pair<uint32_t, uint32_t>> m_spanningTree;
+        std::vector<std::pair<uint32_t, uint32_t>> spanningTree;
     };
 }
 #endif

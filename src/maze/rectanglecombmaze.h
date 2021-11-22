@@ -7,16 +7,21 @@ namespace MMaze
     {
     public:
         RectangleCombMaze(uint32_t width, uint32_t height);
+        std::vector<Connection> GetDrawPath(std::vector<std::pair<uint32_t, uint32_t>> &path) const override;
+        std::tuple<int, int, int, int> GetMazeCoordinates() const override;
 
     protected:
         void InitializeMaze() override;
-        uint32_t GetVertex(uint32_t x, uint32_t y);
-        bool IsValid(uint32_t x1, uint32_t y1, uint32_t x2, uint32_t y2);
+        uint32_t GetVertex(uint32_t x, uint32_t y) const;
+        std::pair<uint32_t, uint32_t> InverseGetVertes(uint32_t v) const;
+        bool IsValid(int uu, int vv) const;
+        std::tuple<double, double, double, double> GetEdge(uint32_t row, uint32_t col, int edge) const;
 
-        std::vector<Connection> GetDrawPath(std::vector<std::pair<uint32_t, uint32_t>> & path) override;
     private:
         uint32_t m_width;
         uint32_t m_height;
+        static int even_neighbours[6][2];
+        static int odd_neighbours[6][2];
     };
 }
 #endif

@@ -1,5 +1,7 @@
 #include <MazeRenderer.h>
 #include <rectanglemaze.h>
+#include <combmaze.h>
+#include <rectanglecombmaze.h>
 #include <breadthfirstsearch.h>
 #include <kruscal.h>
 #include <depthfirstsearch.h>
@@ -17,8 +19,6 @@ using namespace MMaze;
 MazeRenderer::MazeRenderer(const MMaze::Settings &settings_, MMaze::DifficultyClass diff_, QWidget *parent)
     : QWidget(parent), m_settings(settings_), m_difficulty(diff_)
 {
-    // TODO: Adjust so the size for maze type was choosed based on the difficulty
-
     MMaze::MazeTypes tMazeType = m_settings.mazeType;
     if (tMazeType == MMaze::MazeTypes::RectangularMaze)
     {
@@ -27,13 +27,13 @@ MazeRenderer::MazeRenderer(const MMaze::Settings &settings_, MMaze::DifficultyCl
     }
     else if (tMazeType == MMaze::MazeTypes::RectangleCombMaze)
     {
-        std::pair<uint32_t, uint32_t> diffSize = Application::GetRectangleMazeSizeDifficulty(diff_);
-        // m_maze = new MMaze::RectangleCombMaze(diffSize.first, diffSize.second);
+        std::pair<uint32_t, uint32_t> diffSize = Application::GetRectangleCombMazeSizeDifficulty(diff_);
+        m_maze = new MMaze::RectangleCombMaze(diffSize.first, diffSize.second);
     }
     else if (tMazeType == MMaze::MazeTypes::HoneyCombMaze)
     {
         uint32_t diffSize = Application::GetHoneyCombMazeSizeDifficulty(diff_);
-        // m_maze = new MMaze::RectangleMaze(40,20);
+        m_maze = new MMaze::CombMaze(diffSize);
     }
 
     MMaze::MazeGenAlgo tMazeGenerationAlgorithm = m_settings.mazeGenAlgo;
@@ -82,12 +82,12 @@ void MazeRenderer::paintEvent(QPaintEvent *event)
 
 QSize MazeRenderer::minimumSizeHint() const
 {
-    return QSize{500, 200};
+    return QSize{500, 300};
 }
 
 QSize MazeRenderer::sizeHint() const
 {
-    return QSize{1000, 400};
+    return QSize{1000, 600};
 }
 
 void MazeRenderer::paintMaze(QPainter &paint) const
@@ -113,7 +113,7 @@ void MazeRenderer::paintMaze(QPainter &paint) const
     double widgetWidth = static_cast<double>(this->size().width()) - 2 * h;
     double widgetHeight = static_cast<double>(this->size().height() - 2 * h);
 
-    std::tuple<uint32_t, uint32_t, uint32_t, uint32_t> mazeBounds = m_maze->GetMazeCoordinates();
+    std::tuple<int, int, int, int> mazeBounds = m_maze->GetMazeCoordinates();
     double mazeWidth = static_cast<double>(std::get<2>(mazeBounds) - std::get<0>(mazeBounds));
     double mazeHeight = static_cast<double>(std::get<3>(mazeBounds) - std::get<1>(mazeBounds));
 
@@ -136,7 +136,8 @@ void MazeRenderer::paintMaze(QPainter &paint) const
         x_offset = (widgetWidth - K * mazeWidth) / 2 + h;
         y_offset = (widgetHeight - K * mazeHeight) / 2 + h;
     }
-    paint.translate(x_offset, y_offset);
+    paint.translate(x_offset - K * std::get<0>(mazeBounds), y_offset + K * std::get<1>(mazeBounds));
+    // paint.translate(-std::get<0>(mazeBounds) * K, std::get<1>(mazeBounds) * K);
     auto lines_a = m_maze->GetCurvesCoordinates();
     for (auto const curve : lines_a)
     {

@@ -15,7 +15,6 @@ void Solution::FindSolution(MazeSolvers::MazeSolverAlgorithm * mzsa)
         spanningTreeAdjucencyList[vertex.second].push_back(vertex.first);
     }
     std::vector<std::pair<uint32_t, uint32_t>> path = mzsa->Solve(spanningTreeAdjucencyList,m_maze->GetStart(), m_maze->GetEnd());
-    //TODO: Find the lines for solution representation
     m_path = m_maze->GetDrawPath(path);
 }
 

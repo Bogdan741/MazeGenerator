@@ -75,7 +75,7 @@ std::pair<uint32_t, uint32_t> RectangleMaze::GetPosition(uint32_t u) const
     return {row, column};
 }
 
-std::tuple<uint32_t, uint32_t, uint32_t, uint32_t> RectangleMaze::GetMazeCoordinates() const
+std::tuple<int, int, int, int> RectangleMaze::GetMazeCoordinates() const
 {
     return std::make_tuple(0, 0, m_width, m_height);
 }

@@ -18,7 +18,7 @@ SettingsDialog::SettingsDialog(MMaze::Settings &settings_, QWidget *parent)
     connect(b_mazeColor, &QPushButton::released, this, [this]
             { this->changeColor(b_mazeColor, m_tmpMazeWallColor); });
     connect(b_solColor, &QPushButton::released, this, [this]
-            { this->changeColor(b_solColor, m_tmpSolvLineColor); });
+            { this->changeColor(b_solColor, m_tmpSolutionLineColor); });
     connect(b_backgroundColor, &QPushButton::released, this, [this]
             { this->changeColor(b_backgroundColor, m_tmpBackgroundColor); });
 }
@@ -59,7 +59,7 @@ void SettingsDialog::setUpDialog()
     m_tmpBackgroundColor = m_settings.backgroundColor;
 
     b_solColor->setStyleSheet(QString("background-color: %1;").arg(m_settings.solutionLineColor.name()));
-    m_tmpSolvLineColor = m_settings.solutionLineColor;
+    m_tmpSolutionLineColor = m_settings.solutionLineColor;
 
     int lineWidthMin = 0;
     int lineWidthMax = 20;
@@ -122,7 +122,7 @@ void SettingsDialog::setUpDialog()
 void SettingsDialog::apply()
 {
     m_settings.backgroundColor = m_tmpBackgroundColor;
-    m_settings.solutionLineColor = m_tmpSolvLineColor;
+    m_settings.solutionLineColor = m_tmpSolutionLineColor;
     m_settings.mazeWallColor = m_tmpMazeWallColor;
 
     m_settings.mazeGenAlgo = static_cast<MMaze::MazeGenAlgo>(cb_mazeGenAlgo->itemData(cb_mazeGenAlgo->currentIndex(), Qt::UserRole).toInt());
@@ -207,7 +207,7 @@ void SettingsDialog::setCurrentState()
     m_tmpBackgroundColor = m_settings.backgroundColor;
 
     b_solColor->setStyleSheet(QString("background-color: %1;").arg(m_settings.solutionLineColor.name()));
-    m_tmpSolvLineColor = m_settings.solutionLineColor;
+    m_tmpSolutionLineColor = m_settings.solutionLineColor;
 
     // * Settings the line width color
     sb_lineWidthMaze->setValue(m_settings.lineWidthMazeWall);

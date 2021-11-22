@@ -11,7 +11,7 @@ Maze::Maze(uint32_t nvertices_, uint32_t mazeStart_, uint32_t mazeEnd)
 void Maze::GenerateMaze(MazeGenerators::SpanningTreeAlogrithm *algo)
 {
     InitializeMaze();
-    m_spanningTree = algo->FindSpanningTree(nvertices, adjucenyList);
+    spanningTree = algo->FindSpanningTree(nvertices, adjucenyList);
     RemoveWalls();
 }
 
@@ -31,7 +31,7 @@ std::vector<std::shared_ptr<Curve>> Maze::GetCurvesCoordinates() const
 
 void Maze::RemoveWalls()
 {
-    for (auto const &edge : m_spanningTree)
+    for (auto const &edge : spanningTree)
     {
         auto it1 = std::remove_if(adjucenyList[edge.first].begin(), adjucenyList[edge.first].end(), [&edge](const Connection &con)
                                   { return con.vertex == edge.second; });
@@ -45,7 +45,7 @@ void Maze::RemoveWalls()
 
 std::vector<std::pair<uint32_t, uint32_t>> Maze::GetSpanningTree() const
 {
-    return m_spanningTree;
+    return spanningTree;
 }
 
 uint32_t Maze::GetStart() const

@@ -45,7 +45,9 @@ MainWindow::~MainWindow()
 void MainWindow::createMazeView(MMaze::DifficultyClass diff_)
 {
     if (m_mazes_dispal_a.size() >= maxMazeDisplay)
-        return;
+    {
+        QMessageBox::information(this, "Merator", QString{"Too mush maze windows have been created. Max number: %1. Please close some of the windows if you want to open new."}.arg(maxMazeDisplay));
+    }
     MMaze::MazeDisplayer *mazeView = new MMaze::MazeDisplayer(m_settings, diff_, this);
     m_mazes_dispal_a.push_back(mazeView);
     mazeView->show();

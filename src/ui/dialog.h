@@ -38,7 +38,7 @@ private:
 
     QColor m_tmpBackgroundColor;
     QColor m_tmpMazeWallColor;
-    QColor m_tmpSolvLineColor;
+    QColor m_tmpSolutionLineColor;
     
     QLabel *n_mazeColor;
     QLabel *n_solColor;

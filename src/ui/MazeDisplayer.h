@@ -5,6 +5,7 @@
 #include <types.h>
 #include <MazeRenderer.h>
 #include <QDialog>
+#include <QWindow>
 namespace MMaze
 {
     class MazeDisplayer : public QDialog
@@ -25,6 +26,7 @@ namespace MMaze
         QPushButton * b_hideSolution;
         QPushButton * b_close;
         MMaze::MazeRenderer * m_mazeRanderer;
+        QString m_pathToSaveImage;
     };
 }
 
