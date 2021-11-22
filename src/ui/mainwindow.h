@@ -21,7 +21,7 @@ private:
     Ui::MainWindow *ui;
     MMaze::Settings &m_settings;
 
-    std::vector<MMaze::MazeDisplayer*> m_mazes_dispal_a;
+    std::vector<std::shared_ptr<MMaze::MazeDisplayer>> m_mazes_dispal_a;
     int maxMazeDisplay = 10;
 };
 #endif // MAINWINDOW_H

@@ -8,6 +8,7 @@ set(ALGORITHMS
     mazesolveralgo.cpp
     prim.cpp
     spanningtreealgo.cpp
+    loopErasedRandomWalk.cpp
 )
-
+include_directories(algorithms)
 add_library(Algorithms STATIC ${ALGORITHMS})

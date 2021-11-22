@@ -10,6 +10,7 @@ namespace MMaze
         DFS,
         Kruscal,
         Prim,
+        LoopErasedRandomWalk,
     };
 
     enum class MazeSolvAlgo: char

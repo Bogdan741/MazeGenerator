@@ -33,7 +33,7 @@ std::pair<uint32_t, uint32_t> Application::GetRectangleCombMazeSizeDifficulty(MM
     std::pair<uint32_t, uint32_t> res;
     if (diff_ == MMaze::DifficultyClass::EASY)
     {
-        res = std::make_pair(20, 5);
+        res = std::make_pair(15, 5);
     }
     else if (diff_ == MMaze::DifficultyClass::NORMAL)
     {
@@ -41,7 +41,7 @@ std::pair<uint32_t, uint32_t> Application::GetRectangleCombMazeSizeDifficulty(MM
     }
     else if (diff_ == MMaze::DifficultyClass::HARD)
     {
-        res = std::make_pair(50, 10);
+        res = std::make_pair(50, 20);
     }
     else if (diff_ == MMaze::DifficultyClass::INSANE)
     {

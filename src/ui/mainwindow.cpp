@@ -32,23 +32,21 @@ MainWindow::MainWindow(MMaze::Settings &settings_, QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui;
-    for (int i = 0; i < m_mazes_dispal_a.size(); ++i)
-    {
-        if (m_mazes_dispal_a[i] != nullptr)
-        {
-            m_mazes_dispal_a[i]->close();
-            delete m_mazes_dispal_a[i];
-        }
-    }
 }
 
 void MainWindow::createMazeView(MMaze::DifficultyClass diff_)
 {
-    if (m_mazes_dispal_a.size() >= maxMazeDisplay)
+    for (auto dis : m_mazes_dispal_a)
+    {
+        if (dis && dis->isHidden())
+            m_mazes_dispal_a.erase(std::remove_if(m_mazes_dispal_a.begin(), m_mazes_dispal_a.end(), [&dis](const std::shared_ptr<MMaze::MazeDisplayer> i){return i == dis;}));
+    }
+    if (m_mazes_dispal_a.size() > maxMazeDisplay)
     {
         QMessageBox::information(this, "Merator", QString{"Too mush maze windows have been created. Max number: %1. Please close some of the windows if you want to open new."}.arg(maxMazeDisplay));
+        return;
     }
-    MMaze::MazeDisplayer *mazeView = new MMaze::MazeDisplayer(m_settings, diff_, this);
+    std::shared_ptr<MMaze::MazeDisplayer> mazeView = std::make_shared<MMaze::MazeDisplayer>(m_settings, diff_, this);
     m_mazes_dispal_a.push_back(mazeView);
     mazeView->show();
 }

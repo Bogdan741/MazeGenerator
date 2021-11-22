@@ -6,7 +6,7 @@
 #include <QColorDialog>
 #include <QDebug>
 
-#define DEBUG
+//#define DEBUG
 
 SettingsDialog::SettingsDialog(MMaze::Settings &settings_, QWidget *parent)
     : QDialog(parent), m_settings(settings_)
@@ -91,6 +91,7 @@ void SettingsDialog::setUpDialog()
     cb_mazeGenAlgo->addItem(tr("BFS"), static_cast<int>(MMaze::MazeGenAlgo::BFS));
     cb_mazeGenAlgo->addItem(tr("Kruscal"), static_cast<int>(MMaze::MazeGenAlgo::Kruscal));
     cb_mazeGenAlgo->addItem(tr("Prim"), static_cast<int>(MMaze::MazeGenAlgo::Prim));
+    cb_mazeGenAlgo->addItem(tr("Loop Erased Random Walk"), static_cast<int>(MMaze::MazeGenAlgo::LoopErasedRandomWalk));
 
     QFormLayout *formLayout = new QFormLayout();
     formLayout->addRow(n_mazeGenAlog, cb_mazeGenAlgo);
@@ -170,6 +171,8 @@ void SettingsDialog::setCurrentState()
         iMazeGenAlgo = cb_mazeGenAlgo->findData(static_cast<int>(MMaze::MazeGenAlgo::Kruscal));
     else if (m_settings.mazeGenAlgo == MMaze::MazeGenAlgo::Prim)
         iMazeGenAlgo = cb_mazeGenAlgo->findData(static_cast<int>(MMaze::MazeGenAlgo::Prim));
+    else if (m_settings.mazeGenAlgo == MMaze::MazeGenAlgo::LoopErasedRandomWalk)
+        iMazeGenAlgo = cb_mazeGenAlgo->findData(static_cast<int>(MMaze::MazeGenAlgo::LoopErasedRandomWalk));
 
     if(iMazeGenAlgo != -1)
         cb_mazeGenAlgo->setCurrentIndex(iMazeGenAlgo);

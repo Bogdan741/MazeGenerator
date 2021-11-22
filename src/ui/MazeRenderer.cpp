@@ -6,6 +6,7 @@
 #include <kruscal.h>
 #include <depthfirstsearch.h>
 #include <prim.h>
+#include <loopErasedRandomWalk.h>
 #include <astar.h>
 #include <BFSSolver.h>
 #include <DFSSolver.h>
@@ -52,6 +53,10 @@ MazeRenderer::MazeRenderer(const MMaze::Settings &settings_, MMaze::DifficultyCl
     else if (tMazeGenerationAlgorithm == MMaze::MazeGenAlgo::Prim)
     {
         m_mazeGenerationAlgorithm = new MMaze::MazeGenerators::Prim();
+    }
+    else if (tMazeGenerationAlgorithm == MMaze::MazeGenAlgo::LoopErasedRandomWalk)
+    {
+        m_mazeGenerationAlgorithm = new MMaze::MazeGenerators::LoopErasedRandomWalk;
     }
 
     MMaze::MazeSolvAlgo tMazeSolvmentAlgorithm = m_settings.mazeSolveAlgo;

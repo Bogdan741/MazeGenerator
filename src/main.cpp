@@ -8,14 +8,13 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     MMaze::Settings set;
-    set.backgroundColor = QColor{255, 255, 255};
-    set.mazeWallColor = QColor(0, 0, 0);
-    set.solutionLineColor = QColor(255, 122, 51);
-    set.mazeGenAlgo = MMaze::MazeGenAlgo::BFS;
-    set.mazeType = MMaze::MazeTypes::HoneyCombMaze;
-    set.mazeSolveAlgo = MMaze::MazeSolvAlgo::BFS;
-    set.backgroundColor = Qt::blue;
-    set.mazeWallColor = Qt::black;
+    
+    set.backgroundColor = QColor{85, 87, 83};
+    set.mazeWallColor = QColor{193, 125, 17};
+    set.solutionLineColor = QColor{0,0,0};
+    set.mazeGenAlgo = MMaze::MazeGenAlgo::LoopErasedRandomWalk;
+    set.mazeType = MMaze::MazeTypes::RectangleCombMaze;
+    set.mazeSolveAlgo = MMaze::MazeSolvAlgo::AStar;
     set.lineWidthMazeWall = 2;
     set.lineWidhtSolution = 2;
     
