@@ -11,7 +11,7 @@ CombMaze::CombMaze(uint32_t size_)
 void CombMaze::InitializeMaze()
 {
     Maze::InitializeMaze();
-    // TODO: View
+   
     for (int u = -m_size + 1; u < m_size; ++u)
     {
         auto vextent = VExtent(u);

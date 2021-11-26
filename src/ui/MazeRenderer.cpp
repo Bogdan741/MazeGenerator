@@ -182,7 +182,6 @@ void MazeRenderer::paintMaze(QPainter &paint) const
 
 void MazeRenderer::getImage(QString fileName) const
 {
-    // TODO:
     QSvgGenerator generator;
     generator.setFileName(fileName);
     generator.setSize(size());

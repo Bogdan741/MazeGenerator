@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(Maze VERSION 0.1 LANGUAGES CXX)
+project(Merator VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_PREFIX_PATH "/home/avenortoz/Qt/6.1.2/gcc_64/lib/cmake")
@@ -17,4 +17,6 @@ find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets Svg REQUIRED)
 
 
 include_directories(src)
+
+
 add_subdirectory(src)

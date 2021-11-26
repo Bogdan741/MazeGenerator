@@ -67,6 +67,5 @@ std::vector<std::pair<uint32_t, uint32_t>> AStar::Solve(
 
 int AStar::heurustic(uint32_t u, uint32_t v)
 {
-    // TODO:
     return fabs(u - v);
 }

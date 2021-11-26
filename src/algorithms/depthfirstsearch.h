@@ -7,7 +7,6 @@ namespace MMaze
 {
     namespace MazeGenerators
     {
-        // TODO: Provide non-Recursive implementation
         class DepthFirstSearch : public SpanningTreeAlogrithm
         {
         public:
