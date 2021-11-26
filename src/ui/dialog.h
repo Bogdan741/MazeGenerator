@@ -27,6 +27,7 @@ public:
 
 private:
     void setUpDialog();
+    void isColorsValid() const;
 
 private slots:
     void apply();
@@ -45,7 +46,6 @@ private:
     QLabel *n_backgoundColor;
     QLabel *n_lineWidthMaze;
     QLabel *n_lineWidthSol;
-    QLabel *n_penCapStyle;
     QLabel *n_mazeType;
     QLabel *n_solutionAlgo;
     QLabel *n_mazeGenAlog;

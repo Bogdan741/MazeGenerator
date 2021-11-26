@@ -5,7 +5,8 @@
 #include <QVBoxLayout>
 #include <QColorDialog>
 #include <QDebug>
-
+#include <settingsexception.h>
+#include <QMessageBox>
 //#define DEBUG
 
 SettingsDialog::SettingsDialog(MMaze::Settings &settings_, QWidget *parent)
@@ -35,7 +36,6 @@ void SettingsDialog::setUpDialog()
     n_backgoundColor = new QLabel("Background color:");
     n_lineWidthMaze = new QLabel("Maze line width:");
     n_lineWidthSol = new QLabel("Solution line width:");
-    n_penCapStyle = new QLabel("Style of line edges:");
     n_mazeType = new QLabel("Maze type:");
     n_solutionAlgo = new QLabel("Maze solution algorithm:");
     n_mazeGenAlog = new QLabel("Maze generation alogrithms:");
@@ -62,7 +62,7 @@ void SettingsDialog::setUpDialog()
     m_tmpSolutionLineColor = m_settings.solutionLineColor;
 
     int lineWidthMin = 0;
-    int lineWidthMax = 20;
+    int lineWidthMax = 10;
 
     sb_lineWidthMaze = new QSpinBox();
     sb_lineWidthSol = new QSpinBox();
@@ -79,7 +79,7 @@ void SettingsDialog::setUpDialog()
 
     cb_mazeType->addItem(tr("Rectangular Maze"), static_cast<int>(MMaze::MazeTypes::RectangularMaze));
     cb_mazeType->addItem(tr("Honey Comb Maze"), static_cast<int>(MMaze::MazeTypes::HoneyCombMaze));
-    cb_mazeType->addItem(tr("Rectangular Comb maze"), static_cast<int>(MMaze::MazeTypes::RectangleCombMaze));
+    cb_mazeType->addItem(tr("Rectangular Comb Maze"), static_cast<int>(MMaze::MazeTypes::RectangleCombMaze));
 
     cb_solutionAlgo = new QComboBox();
     cb_solutionAlgo->addItem(tr("BFS"), static_cast<int>(MMaze::MazeSolvAlgo::BFS));
@@ -122,6 +122,16 @@ void SettingsDialog::setUpDialog()
 
 void SettingsDialog::apply()
 {
+    try
+    {
+        isColorsValid();
+    }
+    catch (const MMaze::SettingsException &ex)
+    {
+        QMessageBox::warning(this, "Merator", QString::fromStdString(ex.message()));
+        return;
+    }
+
     m_settings.backgroundColor = m_tmpBackgroundColor;
     m_settings.solutionLineColor = m_tmpSolutionLineColor;
     m_settings.mazeWallColor = m_tmpMazeWallColor;
@@ -174,7 +184,7 @@ void SettingsDialog::setCurrentState()
     else if (m_settings.mazeGenAlgo == MMaze::MazeGenAlgo::LoopErasedRandomWalk)
         iMazeGenAlgo = cb_mazeGenAlgo->findData(static_cast<int>(MMaze::MazeGenAlgo::LoopErasedRandomWalk));
 
-    if(iMazeGenAlgo != -1)
+    if (iMazeGenAlgo != -1)
         cb_mazeGenAlgo->setCurrentIndex(iMazeGenAlgo);
 
     // * Setting maze solving algorithm option
@@ -185,23 +195,22 @@ void SettingsDialog::setCurrentState()
         iMazeSolvAlgo = cb_solutionAlgo->findData(static_cast<int>(MMaze::MazeSolvAlgo::DFS));
     else if (m_settings.mazeSolveAlgo == MMaze::MazeSolvAlgo::AStar)
         iMazeSolvAlgo = cb_solutionAlgo->findData(static_cast<int>(MMaze::MazeSolvAlgo::AStar));
-    
-    if(iMazeSolvAlgo != -1)
+
+    if (iMazeSolvAlgo != -1)
         cb_solutionAlgo->setCurrentIndex(iMazeSolvAlgo);
-    
+
     // * Setting maze type option
     int iMazeType = -1;
-    if(m_settings.mazeType == MMaze::MazeTypes::HoneyCombMaze)
+    if (m_settings.mazeType == MMaze::MazeTypes::HoneyCombMaze)
         iMazeType = cb_mazeType->findData(static_cast<int>(MMaze::MazeTypes::HoneyCombMaze));
-    else if(m_settings.mazeType == MMaze::MazeTypes::RectangularMaze)
+    else if (m_settings.mazeType == MMaze::MazeTypes::RectangularMaze)
         iMazeType = cb_mazeType->findData(static_cast<int>(MMaze::MazeTypes::RectangularMaze));
-    else if(m_settings.mazeType == MMaze::MazeTypes::RectangleCombMaze)
+    else if (m_settings.mazeType == MMaze::MazeTypes::RectangleCombMaze)
         iMazeType = cb_mazeType->findData(static_cast<int>(MMaze::MazeTypes::RectangleCombMaze));
 
-    if(iMazeType != -1)
+    if (iMazeType != -1)
         cb_mazeType->setCurrentIndex(iMazeType);
 
-    
     // * Settings the colors options
     b_mazeColor->setStyleSheet(QString("background-color: %1;").arg(m_settings.mazeWallColor.name()));
     m_tmpMazeWallColor = m_settings.mazeWallColor;
@@ -215,4 +224,10 @@ void SettingsDialog::setCurrentState()
     // * Settings the line width color
     sb_lineWidthMaze->setValue(m_settings.lineWidthMazeWall);
     sb_lineWidthSol->setValue(m_settings.lineWidhtSolution);
+}
+
+void SettingsDialog::isColorsValid() const
+{
+    if (m_tmpBackgroundColor == m_tmpSolutionLineColor || m_tmpSolutionLineColor == m_tmpMazeWallColor || m_tmpBackgroundColor == m_tmpMazeWallColor)
+        throw MMaze::SettingsException();
 }

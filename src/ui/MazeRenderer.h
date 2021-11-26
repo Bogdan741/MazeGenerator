@@ -15,6 +15,7 @@ namespace MMaze
         Q_OBJECT
     public:
         MazeRenderer(const MMaze::Settings &settigs_, MMaze::DifficultyClass diff, QWidget *parent = nullptr);
+        ~MazeRenderer();
     public slots:
         void getImage(QString fileName) const;
         void setSolutionMode(bool mode);
@@ -27,10 +28,10 @@ namespace MMaze
     private:
         const MMaze::Settings m_settings;
         MMaze::DifficultyClass m_difficulty;
-        MMaze::Maze * m_maze;
-        MMaze::MazeGenerators::SpanningTreeAlogrithm *m_mazeGenerationAlgorithm;
-        MMaze::Solution * m_solution;
-        MMaze::MazeSolvers::MazeSolverAlgorithm * m_mazeSolvmentAlogrithm;
+        MMaze::Maze * m_maze{nullptr};
+        MMaze::MazeGenerators::SpanningTreeAlogrithm *m_mazeGenerationAlgorithm{nullptr};
+        MMaze::Solution * m_solution{nullptr};
+        MMaze::MazeSolvers::MazeSolverAlgorithm * m_mazeSolvmentAlogrithm{nullptr};
         bool showSolution{false};
     };
 }

@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include <QMessageBox>
 #include <dialog.h>
+#include <dialogexception.h>
 
 MainWindow::MainWindow(MMaze::Settings &settings_, QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow), m_settings(settings_)
@@ -36,17 +37,30 @@ MainWindow::~MainWindow()
 
 void MainWindow::createMazeView(MMaze::DifficultyClass diff_)
 {
-    for (auto dis : m_mazes_dispal_a)
+    for (auto dis : m_mazes_displ_a)
     {
         if (dis && dis->isHidden())
-            m_mazes_dispal_a.erase(std::remove_if(m_mazes_dispal_a.begin(), m_mazes_dispal_a.end(), [&dis](const std::shared_ptr<MMaze::MazeDisplayer> i){return i == dis;}));
+            m_mazes_displ_a.erase(std::remove_if(m_mazes_displ_a.begin(), m_mazes_displ_a.end(), [&dis](const std::shared_ptr<MMaze::MazeDisplayer> i)
+                                                 { return i == dis; }));
     }
-    if (m_mazes_dispal_a.size() > maxMazeDisplay)
+
+    try
     {
-        QMessageBox::information(this, "Merator", QString{"Too mush maze windows have been created. Max number: %1. Please close some of the windows if you want to open new."}.arg(maxMazeDisplay));
+        isNewWindowAlloved();
+    }
+    catch (const MMaze::DialogException &ec)
+    {
+        QMessageBox::warning(this, "Merator", QString{"Too much maze windows have been created. Max number: %1. Please close some of the windows if you want to open new."}.arg(maxMazeDisplay));
         return;
     }
+
     std::shared_ptr<MMaze::MazeDisplayer> mazeView = std::make_shared<MMaze::MazeDisplayer>(m_settings, diff_, this);
-    m_mazes_dispal_a.push_back(mazeView);
+    m_mazes_displ_a.push_back(mazeView);
     mazeView->show();
+}
+
+void MainWindow::isNewWindowAlloved() const
+{
+    if (m_mazes_displ_a.size() > maxMazeDisplay)
+        throw MMaze::DialogException();
 }

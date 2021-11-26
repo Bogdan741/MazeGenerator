@@ -78,6 +78,17 @@ MazeRenderer::MazeRenderer(const MMaze::Settings &settings_, MMaze::DifficultyCl
     m_solution->FindSolution(m_mazeSolvmentAlogrithm);
 }
 
+MazeRenderer::~MazeRenderer()
+{
+    if(m_solution)
+        delete m_solution;
+    if(m_maze)
+        delete m_maze;
+    if(m_mazeGenerationAlgorithm)
+        delete m_mazeGenerationAlgorithm;
+    if(m_mazeSolvmentAlogrithm)
+        delete m_mazeSolvmentAlogrithm;
+}
 void MazeRenderer::paintEvent(QPaintEvent *event)
 {
 

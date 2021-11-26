@@ -64,19 +64,19 @@ uint32_t Application::GetHoneyCombMazeSizeDifficulty(MMaze::DifficultyClass diff
     }
     else if (diff_ == MMaze::DifficultyClass::NORMAL)
     {
-        res = 12;
+        res = 10;
     }
     else if (diff_ == MMaze::DifficultyClass::HARD)
     {
-        res = 20;
+        res = 15;
     }
     else if (diff_ == MMaze::DifficultyClass::EXTREAM)
     {
-        res = 35;
+        res = 27;
     }
     else if (diff_ == MMaze::DifficultyClass::INSANE)
     {
-        res = 30;
+        res = 21;
     }
     return res;
 }

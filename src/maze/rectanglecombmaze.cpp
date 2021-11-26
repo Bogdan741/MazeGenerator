@@ -53,8 +53,8 @@ void RectangleCombMaze::InitializeMaze()
                     if (node < nnode)
                     {
                         std::shared_ptr<Line> r2Line = std::make_shared<Line>(std::get<0>(coord), std::get<1>(coord), std::get<2>(coord), std::get<3>(coord));
-                        adjucenyList[GetVertex(y, x)].push_back({GetVertex(vv, uu), r2Line});
-                        adjucenyList[GetVertex(vv, uu)].push_back({GetVertex(y, x), r2Line});
+                        adjucencyList[GetVertex(y, x)].push_back({GetVertex(vv, uu), r2Line});
+                        adjucencyList[GetVertex(vv, uu)].push_back({GetVertex(y, x), r2Line});
                     }
                 }
                 else
@@ -64,14 +64,14 @@ void RectangleCombMaze::InitializeMaze()
                         continue;
                     }
                     auto line = GetEdge(y, x, i);
-                    adjucenyList[GetVertex(y, x)].push_back(Connection(-1, std::make_shared<Line>(std::get<0>(line), std::get<1>(line), std::get<2>(line), std::get<3>(line))));
+                    adjucencyList[GetVertex(y, x)].push_back(Connection(-1, std::make_shared<Line>(std::get<0>(line), std::get<1>(line), std::get<2>(line), std::get<3>(line))));
                 }
             }
         }
     }
 }
 
-std::vector<Connection> RectangleCombMaze::GetDrawPath(std::vector<std::pair<uint32_t, uint32_t>> &path) const
+std::vector<Connection> RectangleCombMaze::GetDrawPathImp(const std::vector<std::pair<uint32_t, uint32_t>> &path) const
 {
     std::vector<Connection> res_path;
     for (const auto edge : path)
@@ -111,7 +111,7 @@ std::tuple<double, double, double, double> RectangleCombMaze::GetEdge(uint32_t r
     return std::make_tuple(x1, y1, x2, y2);
 }
 
-std::tuple<int, int, int, int> RectangleCombMaze::GetMazeCoordinates() const
+std::tuple<int, int, int, int> RectangleCombMaze::GetMazeCoordinatesImp() const
 {
     return std::make_tuple(-1, -sqrt(3), m_width + m_width / 2, sqrt(3) * m_height);
 }

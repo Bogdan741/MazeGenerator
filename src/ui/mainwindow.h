@@ -17,11 +17,12 @@ public:
     ~MainWindow();
 private:
     void createMazeView(MMaze::DifficultyClass diff_);
+    void isNewWindowAlloved() const;
 private:
     Ui::MainWindow *ui;
     MMaze::Settings &m_settings;
 
-    std::vector<std::shared_ptr<MMaze::MazeDisplayer>> m_mazes_dispal_a;
+    std::vector<std::shared_ptr<MMaze::MazeDisplayer>> m_mazes_displ_a;
     int maxMazeDisplay = 10;
 };
 #endif // MAINWINDOW_H

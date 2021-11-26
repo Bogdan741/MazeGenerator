@@ -21,17 +21,18 @@ namespace MMaze
         std::vector<std::pair<uint32_t, uint32_t>> GetSpanningTree() const;
         uint32_t GetStart() const;
         uint32_t GetEnd() const;
-        
-        virtual std::tuple<int, int, int, int> GetMazeCoordinates() const = 0;
-        virtual std::vector<Connection> GetDrawPath(std::vector<std::pair<uint32_t, uint32_t>> & path) const = 0;
+        std::tuple<int, int, int, int> GetMazeCoordinates() const;
+        std::vector<Connection> GetDrawPath(const std::vector<std::pair<uint32_t, uint32_t>> & path) const;
 
     protected:
+        virtual std::tuple<int, int, int, int> GetMazeCoordinatesImp() const = 0;
+        virtual std::vector<Connection> GetDrawPathImp(const std::vector<std::pair<uint32_t, uint32_t>> & path) const = 0;
         virtual void InitializeMaze() = 0;
-
         void RemoveWalls();
+        
     protected:
         uint32_t nvertices;
-        Graph adjucenyList;
+        Graph adjucencyList;
         uint32_t mazeStart;
         uint32_t mazeEnd;
         std::vector<std::pair<uint32_t, uint32_t>> spanningTree;

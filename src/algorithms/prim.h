@@ -12,9 +12,6 @@ namespace MMaze
         public:
             Prim();
             std::vector<std::pair<uint32_t, uint32_t>> FindSpanningTree(uint32_t nvertices, const Graph &adjacencylist) override;
-
-        private:
-        
         };
     }
 }

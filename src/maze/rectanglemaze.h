@@ -7,13 +7,13 @@ namespace MMaze
     {
     public:
         RectangleMaze(uint32_t width_, uint32_t height_);
-        std::vector<Connection> GetDrawPath(std::vector<std::pair<uint32_t, uint32_t>> & path) const override;
-        std::tuple<int, int, int, int> GetMazeCoordinates() const override;
 
     protected:
+        std::tuple<int, int, int, int> GetMazeCoordinatesImp() const override;
+        std::vector<Connection> GetDrawPathImp(const std::vector<std::pair<uint32_t, uint32_t>> & path) const override;
         void InitializeMaze() override;
-        uint32_t GetIndex(uint32_t x, uint32_t y) const;
-        std::pair<uint32_t, uint32_t> GetPosition(uint32_t u) const;
+        uint32_t GetVertex(uint32_t x, uint32_t y) const;
+        std::pair<uint32_t, uint32_t> InverseGetVertex(uint32_t u) const;
         
     private:
         uint32_t m_width;

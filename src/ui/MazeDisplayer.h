@@ -11,21 +11,23 @@ namespace MMaze
     class MazeDisplayer : public QDialog
     {
         Q_OBJECT
-        public:
-        MazeDisplayer(const MMaze::Settings & settings_, MMaze::DifficultyClass diff_ , QWidget * parent = nullptr);
-        public slots:
+    public:
+        MazeDisplayer(const MMaze::Settings &settings_, MMaze::DifficultyClass diff_, QWidget *parent = nullptr);
+    public slots:
         void saveMaze();
-        private:
+        void isFileNameValid(const QString &) const;
+
+    private:
         void setUpWidget();
 
-        private:
+    private:
         MMaze::Settings m_settings;
         MMaze::DifficultyClass m_difficulty;
-        QPushButton * b_save;
-        QPushButton * b_showSolution;
-        QPushButton * b_hideSolution;
-        QPushButton * b_close;
-        MMaze::MazeRenderer * m_mazeRanderer;
+        QPushButton *b_save;
+        QPushButton *b_showSolution;
+        QPushButton *b_hideSolution;
+        QPushButton *b_close;
+        MMaze::MazeRenderer *m_mazeRanderer;
         QString m_pathToSaveImage;
     };
 }

@@ -17,21 +17,21 @@ void CombMaze::InitializeMaze()
         auto vextent = VExtent(u);
         for (int v = vextent.first; v <= vextent.second; ++v)
         {
-            int node = VertexIndex(u, v);
+            int node = GetVertex(u, v);
             for (int n = 0; n < 6; ++n)
             {
                 int uu = u + neighbours[n][0], vv = v + neighbours[n][1];
                 if (IsValidNode(uu, vv))
                 {
-                    int nnode = VertexIndex(uu, vv);
+                    int nnode = GetVertex(uu, vv);
                     if (nnode > node)
                         continue;
 
                     auto edge = GetEdge(u, v, n);
                     std::shared_ptr<Line> ptr =
                         std::make_shared<Line>(std::get<0>(edge), std::get<1>(edge), std::get<2>(edge), std::get<3>(edge));
-                    adjucenyList[node].push_back({static_cast<uint32_t>(nnode), ptr});
-                    adjucenyList[nnode].push_back({static_cast<uint32_t>(node), ptr});
+                    adjucencyList[node].push_back({static_cast<uint32_t>(nnode), ptr});
+                    adjucencyList[nnode].push_back({static_cast<uint32_t>(node), ptr});
                 }
                 else
                 {
@@ -40,7 +40,7 @@ void CombMaze::InitializeMaze()
                         continue;
 
                     auto edge = GetEdge(u, v, n);
-                    adjucenyList[node].push_back(
+                    adjucencyList[node].push_back(
                         Connection(-1, std::make_shared<Line>(std::get<0>(edge), std::get<1>(edge), std::get<2>(edge), std::get<3>(edge))));
                 }
             }
@@ -48,7 +48,7 @@ void CombMaze::InitializeMaze()
     }
 }
 
-int CombMaze::VertexIndex(int u, int v) const
+int CombMaze::GetVertex(int u, int v) const
 {
     if (u <= 0)
         return ((3 * m_size + u) * (m_size + u - 1)) / 2 + v;
@@ -84,7 +84,7 @@ bool CombMaze::IsValidNode(int u, int v)
 }
 
 
-std::pair<int, int> CombMaze::InverseVertexIndex(int vertex) const
+std::pair<int, int> CombMaze::InverseGetVertex(int vertex) const
 {
     std::pair<int, int> res;
     int u, v;
@@ -102,13 +102,13 @@ std::pair<int, int> CombMaze::InverseVertexIndex(int vertex) const
     return res;
 }
 
-std::vector<Connection> CombMaze::GetDrawPath(std::vector<std::pair<uint32_t, uint32_t>> &path) const
+std::vector<Connection> CombMaze::GetDrawPathImp(const std::vector<std::pair<uint32_t, uint32_t>> &path) const
 {
     std::vector<Connection> res_path;
     for (const auto edge : path)
     {
-        std::pair<int, int> coord1 = InverseVertexIndex(edge.first);
-        std::pair<int, int> coord2 = InverseVertexIndex(edge.second);
+        std::pair<int, int> coord1 = InverseGetVertex(edge.first);
+        std::pair<int, int> coord2 = InverseGetVertex(edge.second);
 
         double dxu = sqrt(3) / 2, dyu = 1.5, dxv = sqrt(3), dyv = 0;
         double cx1 = dxu * coord1.first + dxv * coord1.second, cy1 = dyu * coord1.first + dyv * coord1.second;
@@ -121,7 +121,7 @@ std::vector<Connection> CombMaze::GetDrawPath(std::vector<std::pair<uint32_t, ui
     return res_path;
 }
 
-std::tuple<int, int, int, int> CombMaze::GetMazeCoordinates() const
+std::tuple<int, int, int, int> CombMaze::GetMazeCoordinatesImp() const
 {
     double xlim = sqrt(3) * (m_size - 0.5), ylim = 1.5 * m_size - 0.5;
     return std::make_tuple(-xlim, -ylim, xlim, ylim);

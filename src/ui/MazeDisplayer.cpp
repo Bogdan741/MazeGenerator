@@ -4,6 +4,8 @@
 #include <QSpacerItem>
 #include <QFileDialog>
 #include <QDir>
+#include <saveexception.h>
+#include <QMessageBox>
 using namespace MMaze;
 
 MazeDisplayer::MazeDisplayer(const MMaze::Settings & settings_, MMaze::DifficultyClass diff_, QWidget * parent)
@@ -67,9 +69,23 @@ void MazeDisplayer::saveMaze()
 {
     QString fileName = QFileDialog::getSaveFileName(this,tr("Save image"),m_pathToSaveImage,tr("Images (*.svg)"));
 
-    if(fileName.isNull())
+    try{
+        isFileNameValid(fileName);
+    }
+    catch(const MMaze::SaveException & ec)
+    {
+        QMessageBox::warning(this, "Merator", QString::fromStdString(ec.message()));
         return;
+    }
     
     m_pathToSaveImage = QFileInfo(fileName).path();
     m_mazeRanderer->getImage(fileName+".svg");
+}
+
+void MazeDisplayer::isFileNameValid(const QString & fileName ) const
+{
+    if(fileName.isNull())
+    {
+        throw MMaze::SaveException();
+    }
 }
