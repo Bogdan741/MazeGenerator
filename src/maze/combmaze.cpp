@@ -11,7 +11,7 @@ CombMaze::CombMaze(uint32_t size_)
 void CombMaze::InitializeMaze()
 {
     Maze::InitializeMaze();
-   
+
     for (int u = -m_size + 1; u < m_size; ++u)
     {
         auto vextent = VExtent(u);
@@ -67,7 +67,7 @@ std::tuple<double, double, double, double> CombMaze::GetEdge(
                            cy + sin(theta2));
 }
 
-std::pair<int, int> CombMaze::VExtent(int u)
+std::pair<int, int> CombMaze::VExtent(int u) const
 {
     if (u < 0)
         return {-m_size - u + 1, m_size - 1};
@@ -75,14 +75,13 @@ std::pair<int, int> CombMaze::VExtent(int u)
         return {-m_size + 1, m_size - 1 - u};
 }
 
-bool CombMaze::IsValidNode(int u, int v)
+bool CombMaze::IsValidNode(int u, int v) const
 {
     if (u <= -m_size || u >= m_size)
         return false;
     auto vextent = VExtent(u);
     return v >= vextent.first && v <= vextent.second;
 }
-
 
 std::pair<int, int> CombMaze::InverseGetVertex(int vertex) const
 {
@@ -95,7 +94,7 @@ std::pair<int, int> CombMaze::InverseGetVertex(int vertex) const
     }
     else
     {
-        u = ceil((4 * m_size - 3 - sqrt(28 * m_size * m_size - 28 * m_size + 1 - 8 * vertex)) / 2.0 );
+        u = ceil((4 * m_size - 3 - sqrt(28 * m_size * m_size - 28 * m_size + 1 - 8 * vertex)) / 2.0);
         v = vertex - (3 * m_size * (m_size - 1) + (4 * m_size - u - 1) * u) / 2;
     }
     res = std::make_pair(u, v);

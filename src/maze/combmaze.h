@@ -18,8 +18,8 @@ namespace MMaze
         int GetVertex(int, int) const;
         std::pair<int, int> InverseGetVertex(int) const;
         virtual std::tuple<double, double, double, double> GetEdge(int, int, int) const;
-        std::pair<int, int> VExtent(int);
-        bool IsValidNode(int, int);
+        std::pair<int, int> VExtent(int) const;
+        bool IsValidNode(int, int) const;
 
     private:
         int m_size;
